@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
+
+
+    <style name="SCBSwitch" parent="Theme.EventFinderGreenLantern">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/green_200</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/darkgrey_200</item>
+    </style>
+
     <style name="Theme.EventFinderGreenLantern" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green_200</item>
-<!--        <item name="colorPrimaryVariant">@color/green_200</item>-->
+        <item name="colorPrimaryVariant">@color/green_200</item>
         <item name="colorOnPrimary">@color/black</item>
         <item name="colorOnPrimarySurface">@color/black</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/lightgrey_100</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/green_100</item>
         <item name="colorSecondaryVariant">@color/green_100</item>
@@ -17,14 +29,22 @@
         <item name="statusBarForeground">@color/green_100</item>
         <!-- Customize your theme here. -->
 
+<!--        <item name="spinn"-->
         <item name="android:textColor">@color/green_100</item>
         <item name="cardBackgroundColor">@color/black</item>
 
         <item name="android:colorForeground">@color/green_100</item>
         <item name="android:textColorHint">@color/lightgrey_200</item>
-        <item name="android:textSize">22sp</item>
+<!--        <item name="android:textSize">22sp</item>-->
 
         <item name="android:editTextColor">@color/white</item>
         <item name="titleTextColor">@color/green_100</item>
     </style>
+
+    <style name="AppTheme.PopupOverlay" parent="Theme.EventFinderGreenLantern">
+        <item name="android:padding">10dp</item>
+        <item name="android:paddingLeft">20dp</item>
+    </style>
 </resources>
+
+<!--    https://stackoverflow.com/questions/11253512/change-on-color-of-a-switch-->
