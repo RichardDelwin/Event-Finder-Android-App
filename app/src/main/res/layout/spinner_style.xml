@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textColor="@color/white"
+    android:textSize="20sp"/>
+
+<!--    https://stackoverflow.com/questions/2453989/how-to-get-string-array-from-arrays-xml-file-->
+<!--    https://stackoverflow.com/questions/31515854/how-to-change-text-color-in-spinner-without-using-textview-->
