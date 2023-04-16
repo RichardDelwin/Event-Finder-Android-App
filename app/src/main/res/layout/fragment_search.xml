@@ -31,9 +31,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textSize="22sp"
                 android:text="@string/keyword_string" />
 
             <EditText
+                android:id="@+id/keyword_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="Enter the Keyword"
@@ -43,9 +45,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:textSize="22sp"
                 android:text="Distance (Miles)*" />
 
             <EditText
+                android:id="@+id/distance_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="10"
@@ -57,12 +61,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:textSize="22sp"
                 android:text="Category*" />
 
             <Spinner
+                android:id="@+id/spinner_categories"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:entries="@array/categories_list"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Location*"
+                    android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -88,16 +94,16 @@
                     android:textColor="@color/lightgrey_100"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/switch1"
+                    app:layout_constraintEnd_toStartOf="@+id/switch_autodetect"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/switch_autodetect"
                     android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:gravity="right"
                     android:layout_marginTop="10dp"
-                    android:theme="@style/Theme.EventFinderGreenLantern"
+                    android:theme="@style/SCBSwitch"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -105,6 +111,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <EditText
+                android:id="@+id/location_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter the Location"
@@ -115,7 +122,9 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
                 android:orientation="horizontal">
+
                 <Button
+                    android:id="@+id/search_button"
                     android:layout_width="match_parent"
                     android:layout_weight="0.40"
                     android:layout_height="match_parent"
@@ -128,6 +137,7 @@
                 ></Button>
 
                 <Button
+                    android:id="@+id/clear_button"
                     android:layout_width="match_parent"
                     android:layout_weight="0.40"
                     android:layout_height="match_parent"
