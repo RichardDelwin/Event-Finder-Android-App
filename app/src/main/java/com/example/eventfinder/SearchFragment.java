@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.provider.SyncStateContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +20,10 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.eventfinder.DataClasses.Location;
 import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.Helpers.ServerAccessHelper;
+import com.example.eventfinder.Interfaces.VolleyCallBack;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.HashMap;
@@ -33,15 +35,12 @@ public class SearchFragment extends Fragment {
     private EditText keywordET;
     private EditText distanceET;
     private EditText locationET;
-
     private Spinner categorySpinner;
     private Switch autoDetect;
-
     private RequestQueue requestQueue;
-
     private ServerAccessHelper serverAccessHelper;
-
     Map<String, String> category_dictionary;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +48,6 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         requestQueue = Volley.newRequestQueue(getActivity());
         serverAccessHelper = new ServerAccessHelper(requestQueue);
-
         category_dictionary = new HashMap<>();
 
         // Add the key-value pairs to the dictionary
@@ -68,7 +66,7 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        categorySpinner = view.findViewById(R.id.spinner_categories);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categories_list, R.layout.spinner_style);
         adapter.setDropDownViewResource(R.layout.spinner_style);
         categorySpinner.setAdapter(adapter);
@@ -77,7 +75,6 @@ public class SearchFragment extends Fragment {
         distanceET = view.findViewById(R.id.distance_edittext);
         locationET = view.findViewById(R.id.location_edittext);
 
-        categorySpinner = view.findViewById(R.id.spinner_categories);
 
         Button searchButton = view.findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener(){
@@ -135,15 +132,45 @@ public class SearchFragment extends Fragment {
 
         if(validateForm()){
 
-            Toast.makeText(getActivity(), "Search called", Toast.LENGTH_SHORT).show();
-            String category = categorySpinner.getSelectedItem().toString();
+            resolveLocation_makeSearchApiCall();
 
-            category = category_dictionary.get(category);
+        }
+    }
 
-            SearchObject searchObject = new SearchObject(keywordET.getText().toString(), category, distanceET.getText().toString(), 34.003, -118.2863);
+    private void makeSearchApiCall(Location location){
+        Toast.makeText(getActivity(), "Search called", Toast.LENGTH_SHORT).show();
+        String category = categorySpinner.getSelectedItem().toString();
 
-            serverAccessHelper.search(searchObject, getActivity());
+        category = category_dictionary.get(category);
 
+        SearchObject searchObject = new SearchObject(keywordET.getText().toString(), category,
+                distanceET.getText().toString(), location.getLatitude(),location.getLongitude());
+
+        serverAccessHelper.search(searchObject, getActivity());
+    }
+
+    private void resolveLocation_makeSearchApiCall() {
+
+        boolean auto_detect_loc = autoDetect.isChecked();
+        if (auto_detect_loc) {
+           serverAccessHelper.autoDetectLocation(new VolleyCallBack() {
+                @Override
+                public void onSuccess(Location location) {
+                    makeSearchApiCall(location);
+                }
+            });
+
+        } else {
+            Log.d("PATH", "resolveLocation-else");
+            String locationText = locationET.getText().toString();
+            serverAccessHelper.geoCode(locationText, new VolleyCallBack() {
+                @Override
+                public void onSuccess(Location location) {
+                    makeSearchApiCall(location);
+                }
+            });
+
+            Log.d("PATH", "resolveLocation-else[EXIT]");
         }
     }
 }
