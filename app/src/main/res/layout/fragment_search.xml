@@ -34,6 +34,22 @@
                 android:textSize="22sp"
                 android:text="@string/keyword_string" />
 
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Enter the Keyword"
+                android:textSize="20sp"
+                android:id="@+id/autocompleteTV"
+                >
+
+            </AutoCompleteTextView>
+
+<!--            <androidx.appcompat.widget.SearchView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                ></androidx.appcompat.widget.SearchView>-->
+
+
             <EditText
                 android:id="@+id/keyword_edittext"
                 android:layout_width="match_parent"
@@ -133,8 +149,7 @@
                     android:text="@string/search_string"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-
-                ></Button>
+                />
 
                 <Button
                     android:id="@+id/clear_button"
@@ -147,7 +162,7 @@
                     android:textAllCaps="false"
                     android:textSize="18sp"
                     android:textColor="@color/white"
-                    ></Button>
+                    />
 
             </LinearLayout>
         </LinearLayout>
