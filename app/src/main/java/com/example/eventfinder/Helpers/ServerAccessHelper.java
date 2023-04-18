@@ -14,11 +14,15 @@ import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.DataClasses.SearchResponse;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class ServerAccessHelper {
     final private String serverUrl = "https://myloth-hw8-backend-icno4892.wl.r.appspot.com/";//"http://localhost:3500/";//
@@ -145,5 +149,45 @@ public class ServerAccessHelper {
         );
 
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getSuggestions(CharSequence text, VolleyCallBack callBack) {
+
+        String destUrl = serverUrl + "autocomplete?keyword=%s";
+        try {
+            destUrl = String.format(destUrl, URLEncoder.encode(text.toString(), StandardCharsets.UTF_8.toString()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.GET, destUrl, null,
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            Log.d("REQUEST[SUGGESTIONS]", response.toString());
+                            ArrayList<String> suggestions = gson.fromJson(response.toString(), new TypeToken<ArrayList<String>>(){}.getType());
+                            Log.d("RESPONSE[SUGGESTIONS]", suggestions.toString());
+
+                            callBack.onSuccess(suggestions);
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+
+                    }
+                }
+        );
+
+        requestQueue.add(jsonArrayRequest);
+
+
     }
 }
