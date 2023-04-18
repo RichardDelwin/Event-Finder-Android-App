@@ -3,6 +3,8 @@ package com.example.eventfinder.Interfaces;
 
 import com.example.eventfinder.DataClasses.Location;
 
-public interface VolleyCallBack {
-    void onSuccess(Location location);
+import java.util.ArrayList;
+
+public interface VolleyCallBack<T> {
+    void onSuccess(T t);
 }
