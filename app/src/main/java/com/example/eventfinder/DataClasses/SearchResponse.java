@@ -11,17 +11,6 @@ public class SearchResponse {
     private String classifications;
     private String venue;
 
-//    public SearchResponse(String name, String id, String icon, String localDate, String localTime, String sorterKey, String classifications, String venue) {
-//        this.name = name;
-//        this.id = id;
-//        this.icon = icon;
-//        this.localDate = localDate;
-//        this.localTime = localTime;
-//        this.sorterKey = sorterKey;
-//        this.classifications = classifications;
-//        this.venue = venue;
-//    }
-
     public String getName() {
         return name;
     }
