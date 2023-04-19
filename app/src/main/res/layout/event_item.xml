@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="154dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/eventImage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="0.3"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                app:shapeAppearanceOverlay="@style/customRoundedImageView"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="0.4"
+                android:weightSum="3"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp">
+
+                <TextView
+                    android:id="@+id/eventName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Ed Sheeran: +-=/x Tour"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:gravity="center|left"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/lightgrey_100"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/evntVenue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="Ed Sheeran: +-=/x Tour"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:gravity="center|left"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/lightgrey_100"
+                    android:textFontWeight="800"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/eventCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="Ed Sheeran: +-=/x Tour"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:gravity="center|left"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/lightgrey_100"
+                    android:textFontWeight="800"
+                    android:textSize="20sp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="0.3"
+                android:weightSum="3"
+                android:layout_marginVertical="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:id="@+id/eventDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="09/16/2023"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:gravity="center"
+                    android:layout_gravity="right"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/lightgrey_100"
+                    android:textStyle="italic"
+                    android:textSize="14sp"
+                    />
+                <TextView
+                    android:id="@+id/eventTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:layout_gravity="right"
+                    android:text="6:00 PM"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/lightgrey_100"
+                    android:textStyle="italic"
+                    android:textSize="14sp"
+                    />
+
+                <ImageView
+                    android:id="@+id/eventFavButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:foregroundGravity="center"
+                    tools:srcCompat="@mipmap/heart_outline"
+                    android:paddingLeft="10dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
