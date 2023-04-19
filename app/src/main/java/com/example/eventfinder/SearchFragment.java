@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,12 +30,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.eventfinder.Adapters.AutoCompleteAdapter;
+import com.example.eventfinder.DataClasses.FormData;
 import com.example.eventfinder.DataClasses.Location;
 import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.Helpers.ServerAccessHelper;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +45,7 @@ import java.util.Map;
 
 public class SearchFragment extends Fragment {
 
-    private EditText keywordET;
+    private AutoCompleteTextView autocomplete_keyword;
     private EditText distanceET;
     private EditText locationET;
     private Spinner categorySpinner;
@@ -110,16 +115,21 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        keywordET = view.findViewById(R.id.keyword_edittext);
+        autocomplete_keyword = view.findViewById(R.id.autocompleteTV);
         distanceET = view.findViewById(R.id.distance_edittext);
         locationET = view.findViewById(R.id.location_edittext);
 
 
         Button searchButton = view.findViewById(R.id.search_button);
-        searchButton.setOnClickListener(new View.OnClickListener(){
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchButtonClicked(view);
+
+                Bundle bundle = searchButtonClicked(view);
+                if (bundle != null) {
+                    NavController navController = Navigation.findNavController(view);
+                    navController.navigate(R.id.action_searchFragment_to_searchResultsFragment, bundle);
+                }
             }
         });
 
@@ -145,7 +155,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void clearButtonClicked(View view) {
-        keywordET.setText("");
+        autocomplete_keyword.setText("");
         distanceET.setText("10");
         locationET.setText("");
         autoDetect.setChecked(false);
@@ -154,7 +164,7 @@ public class SearchFragment extends Fragment {
     }
 
     private boolean validateForm(){
-        String keyword = keywordET.getText().toString();
+        String keyword = autocomplete_keyword.getText().toString();
         String distance = distanceET.getText().toString();
         String location = locationET.getText().toString();
         boolean auto_detect_loc = autoDetect.isChecked();
@@ -167,50 +177,60 @@ public class SearchFragment extends Fragment {
         return true;
     }
 
-    private void searchButtonClicked(View view) {
+    private Bundle searchButtonClicked(View view) {
 
         if(validateForm()){
 
-            resolveLocation_makeSearchApiCall();
+            Bundle bundle = new Bundle();
 
+            String keyword = autocomplete_keyword.getText().toString();
+            String category = categorySpinner.getSelectedItem().toString();
+            category = category_dictionary.get(category);
+            String distance = distanceET.getText().toString();
+            String loc = locationET.getText().toString();
+            boolean autodetect = autoDetect.isChecked();
+
+            FormData formData  = new FormData(keyword, category, distance, loc, autodetect);
+
+            bundle.putSerializable("formData", (Serializable) formData);
+            return bundle;
+//            resolveLocation_makeSearchApiCall();
         }
+        return null;
     }
 
-    private void makeSearchApiCall(Location location){
-        Toast.makeText(getActivity(), "Search called", Toast.LENGTH_SHORT).show();
-        String category = categorySpinner.getSelectedItem().toString();
-
-        category = category_dictionary.get(category);
-
-        SearchObject searchObject = new SearchObject(keywordET.getText().toString(), category,
-                distanceET.getText().toString(), location.getLatitude(),location.getLongitude());
-
-        serverAccessHelper.search(searchObject, getActivity());
-    }
-
-    private void resolveLocation_makeSearchApiCall() {
-
-        boolean auto_detect_loc = autoDetect.isChecked();
-        if (auto_detect_loc) {
-           serverAccessHelper.autoDetectLocation(new VolleyCallBack<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    makeSearchApiCall(location);
-                }
-            });
-
-        } else {
-            Log.d("PATH", "resolveLocation-else");
-            String locationText = locationET.getText().toString();
-            serverAccessHelper.geoCode(locationText, new VolleyCallBack<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    makeSearchApiCall(location);
-                }
-
-            });
-
-            Log.d("PATH", "resolveLocation-else[EXIT]");
-        }
-    }
+//    private void makeSearchApiCall(Location location){
+//        Toast.makeText(getActivity(), "Search called", Toast.LENGTH_SHORT).show();
+//
+//        SearchObject searchObject = new SearchObject(autocomplete_keyword.getText().toString(), category,
+//                distanceET.getText().toString(), location.getLatitude(),location.getLongitude());
+//
+//        serverAccessHelper.search(searchObject, getActivity());
+//    }
+//
+//    private void resolveLocation_makeSearchApiCall() {
+//
+//        boolean auto_detect_loc = autoDetect.isChecked();
+//        if (auto_detect_loc) {
+//           serverAccessHelper.autoDetectLocation(new VolleyCallBack<Location>() {
+//                @Override
+//                public void onSuccess(Location location) {
+//                    makeSearchApiCall(location);
+//                }
+//            });
+//
+//        } else {
+//            Log.d("PATH", "resolveLocation-else");
+//            String locationText = locationET.getText().toString();
+//            serverAccessHelper.geoCode(locationText, new VolleyCallBack<Location>() {
+//                @Override
+//                public void onSuccess(Location location) {
+//                    makeSearchApiCall(location);
+//                }
+//
+//            });
+//
+//            Log.d("PATH", "resolveLocation-else[EXIT]");
+//        }
+//    }
 }
