@@ -8,6 +8,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,6 +45,8 @@ public class SearchResultsFragment extends Fragment {
     private SearchObject searchObject;
     private SearchEventListAdapter searchEventListAdapter;
 
+    private RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,11 +65,16 @@ public class SearchResultsFragment extends Fragment {
         Bundle bundle = getArguments();
         formData = (FormData) bundle.getSerializable("formData");
 
+
+        recyclerView = view.findViewById(R.id.eventListRecycler);
+        searchEventListAdapter = new SearchEventListAdapter();
+        recyclerView.setAdapter(searchEventListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
         backCard = view.findViewById(R.id.backCard);
         progressBar = view.findViewById(R.id.progressBar);
         backCard.setVisibility(View.GONE);
 
-        searchEventListAdapter = new SearchEventListAdapter();
 
         backCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +102,8 @@ public class SearchResultsFragment extends Fragment {
             @Override
             public void onSuccess(SearchResponse[] searchResponses) {
 
+                searchEventListAdapter.setData(searchResponses);
+                searchEventListAdapter.notifyDataSetChanged();
 
                 progressBar.setVisibility(View.GONE);
                 backCard.setVisibility(View.VISIBLE);
