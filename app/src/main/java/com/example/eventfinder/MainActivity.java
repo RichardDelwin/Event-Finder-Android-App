@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
+import com.example.eventfinder.Fragments.SearchParentFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewPager_mainActivity);
 
         MainFragmentsAdapter mainFragmentsAdapter = new MainFragmentsAdapter(getSupportFragmentManager(), getLifecycle());
-        mainFragmentsAdapter.addFragment(new SearchFragment());
+        mainFragmentsAdapter.addFragment(new SearchParentFragment());
         mainFragmentsAdapter.addFragment(new FavoritesFragment());
         viewPager2.setAdapter(mainFragmentsAdapter);
 
