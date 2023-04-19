@@ -13,6 +13,7 @@ import com.example.eventfinder.DataClasses.Location;
 import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.DataClasses.SearchResponse;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
+import com.example.eventfinder.Interfaces.VolleyCallBackArray;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
@@ -37,7 +38,7 @@ public class ServerAccessHelper {
         this.gson = new Gson();
     }
 
-    public SearchResponse[] search(SearchObject searchObject, Activity activity){
+    public SearchResponse[] search(SearchObject searchObject, VolleyCallBackArray volleyCallBack){
 
         String destUrl = serverUrl + "search?" + searchObject.getAsUrlParams();
 
@@ -48,6 +49,7 @@ public class ServerAccessHelper {
                     public void onResponse(JSONArray response) {
                         try {
                             searchResponses = gson.fromJson(response.toString(), SearchResponse[].class);
+                            volleyCallBack.onSuccess(searchResponses);
                             Log.d("REQUEST", response.toString());
                         }
                         catch (Exception e){
