@@ -1,5 +1,7 @@
 package com.example.eventfinder.Adapters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventfinder.DataClasses.SearchResponse;
 import com.example.eventfinder.Helpers.GeneralHelpers;
+import com.example.eventfinder.Helpers.SharedPreferencesAccessHelper;
 import com.example.eventfinder.R;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
@@ -24,10 +27,11 @@ import java.util.List;
 public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventListAdapter.SearchEventListViewHolder> {
 
     private List<SearchResponse> searchResponses;
-
+    private SharedPreferencesAccessHelper sharedPreferencesAccessHelper;
     boolean isFav = false;
-    public SearchEventListAdapter(){
+    public SearchEventListAdapter(Context context){
         searchResponses = new ArrayList<SearchResponse>();
+        sharedPreferencesAccessHelper = new SharedPreferencesAccessHelper(context);
     }
     @NonNull
     @Override
@@ -45,13 +49,32 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
         Picasso.get().load(event.getIcon()).into(holder.eventImage);
 //        Picasso.get().load(R.mipmap.heart_outline_hdpi).into(holder.eventFavButton);
 
-        holder.eventFavButton.setImageResource(R.mipmap.heart_outline_hdpi);
+        if(sharedPreferencesAccessHelper.idExists(event.getId())) {
+            holder.eventFavButton.setImageResource(R.mipmap.heart_filled_hdpi);
+        }else{
+            holder.eventFavButton.setImageResource(R.mipmap.heart_outline_hdpi);
+        }
         holder.eventName.setText(event.getName());
         holder.eventVenue.setText(event.getVenue());
         holder.eventCategory.setText(event.getClassifications());
         holder.eventDate.setText(GeneralHelpers.getFormattedDate(event.getLocalDate()));
         holder.eventTime.setText(GeneralHelpers.getFormattedTime(event.getLocalTime()));
 
+        holder.eventFavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isFav){
+                    isFav = false;
+                    holder.eventFavButton.setImageResource(R.mipmap.heart_outline_hdpi);
+                    sharedPreferencesAccessHelper.unHeartThis(event);
+
+                }else{
+                    isFav = true;
+                    holder.eventFavButton.setImageResource(R.mipmap.heart_filled_hdpi);
+                    sharedPreferencesAccessHelper.heartThis(event);
+                }
+            }
+        });
     }
 
     @Override
@@ -63,6 +86,7 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
 
         searchResponses = Arrays.asList(newResponses);
     }
+
     public class SearchEventListViewHolder extends RecyclerView.ViewHolder{
 
         public TextView eventName;
@@ -88,18 +112,7 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
             eventTime = itemView.findViewById(R.id.eventTime);
             eventTime.setSelected(true);
             eventFavButton = itemView.findViewById(R.id.eventFavButton);
-            eventFavButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(isFav){
-                        isFav = false;
-                        eventFavButton.setImageResource(R.mipmap.heart_outline_hdpi);
-                    }else{
-                        isFav = true;
-                        eventFavButton.setImageResource(R.mipmap.heart_filled_hdpi);
-                    }
-                }
-            });
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
