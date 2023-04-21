@@ -1,5 +1,7 @@
 package com.example.eventfinder.DataClasses;
 
+import java.util.Objects;
+
 public class SearchResponse {
 
     private String name;
@@ -41,6 +43,23 @@ public class SearchResponse {
 
     public String getVenue() {
         return venue;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof SearchResponse)) {
+            return false;
+        }
+        SearchResponse other = (SearchResponse) obj;
+        return Objects.equals(this.getId(), other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getId());
     }
 }
 
