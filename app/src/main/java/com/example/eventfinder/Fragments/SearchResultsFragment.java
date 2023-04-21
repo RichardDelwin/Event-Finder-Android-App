@@ -67,9 +67,22 @@ public class SearchResultsFragment extends Fragment {
 
 
         recyclerView = view.findViewById(R.id.eventListRecycler);
-        searchEventListAdapter = new SearchEventListAdapter();
+        searchEventListAdapter = new SearchEventListAdapter(view.getContext());
         recyclerView.setAdapter(searchEventListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View view) {
+
+                searchEventListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(@NonNull View view) {
+
+            }
+        });
 
         backCard = view.findViewById(R.id.backCard);
         progressBar = view.findViewById(R.id.progressBar);
