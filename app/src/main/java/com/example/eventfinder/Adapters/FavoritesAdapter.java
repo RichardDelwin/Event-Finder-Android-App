@@ -1,7 +1,6 @@
 package com.example.eventfinder.Adapters;
 
 import android.content.Context;
-import android.media.MediaParser;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventfinder.DataClasses.SearchResponse;
 import com.example.eventfinder.Helpers.GeneralHelpers;
 import com.example.eventfinder.Helpers.SharedPreferencesAccessHelper;
+import com.example.eventfinder.Interfaces.NewActivityCallBack;
 import com.example.eventfinder.R;
 import com.example.eventfinder.ViewModels.FavItemsViewModel;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -25,13 +26,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     private ArrayList<SearchResponse> favSearchResponses;
     private FavItemsViewModel favItemsViewModel;
-
+    private NewActivityCallBack newActivityCallBack;
     private SharedPreferencesAccessHelper sharedPreferencesAccessHelper;
 
-    public FavoritesAdapter(Context context, FavItemsViewModel favItemsViewModel){
+    public FavoritesAdapter(Context context, FavItemsViewModel favItemsViewModel, NewActivityCallBack callBack){
         favSearchResponses = new ArrayList<SearchResponse>();
         sharedPreferencesAccessHelper = new SharedPreferencesAccessHelper(context);
         this.favItemsViewModel = favItemsViewModel;
+        this.newActivityCallBack = callBack;
     }
 
 
@@ -70,6 +72,15 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
             }
         });
+
+        holder.eventCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newActivityCallBack.onButtonClick(event.getId());
+            }
+        });
+
+
     }
 
     @Override
@@ -92,6 +103,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public TextView eventDate;
         public TextView eventTime;
         public ImageView eventFavButton;
+        public CardView eventCard;
         public FavoritesViewHolder(@NonNull View itemView) {
             super(itemView);
             eventName = itemView.findViewById(R.id.eventName);
@@ -107,6 +119,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             eventTime.setSelected(true);
             eventFavButton = itemView.findViewById(R.id.eventFavButton);
 
+            eventCard = itemView.findViewById(R.id.event_searchCard);
         }
     }
 }
