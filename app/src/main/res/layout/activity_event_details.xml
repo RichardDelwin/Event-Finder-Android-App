@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventDetailsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_eventDetails"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="@color/darkgrey_100"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@id/tabLayout_eventDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:subtitle="@string/app_name"
+        app:subtitleTextAppearance="@style/ToolbarStyle"
+        app:titleTextColor="@color/green_100" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout_eventDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_eventDetails"
+        app:layout_constraintBottom_toTopOf="@+id/viewPager2_eventDetails"
+        app:tabBackground="@color/black"
+        app:tabSelectedTextColor="@color/green_100"
+        app:tabTextColor="@color/lightgrey_100"
+        app:tabIconTint="@drawable/tab_icon_color"
+        app:tabInlineLabel="true"
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Details"
+            android:icon="@drawable/info_icon"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ARTIST"
+            android:icon="@mipmap/artist_icon"
+            android:foregroundTint="@color/green_100"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VENUE"
+            android:icon="@drawable/venue_icon"/>
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2_eventDetails"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout_eventDetails">
+
+    </androidx.viewpager2.widget.ViewPager2>
+</androidx.constraintlayout.widget.ConstraintLayout>
