@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:layout_marginBottom="8dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:paddingVertical="15dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    app:shapeAppearanceOverlay="@style/customRoundedImageView"
+                    tools:srcCompat="@tools:sample/avatars"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:orientation="vertical"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Ed Sheeran"
+                        android:textSize="20sp"
+                        android:gravity="center|left"
+                        android:textColor="@color/lightgrey_100"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="110M Followers"
+                        android:singleLine="true"
+                        android:textSize="20sp"
+                        android:gravity="center|left"
+                        android:textColor="@color/lightgrey_100"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Check out on Spotify"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:gravity="center|left"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Popularity"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/lightgrey_100"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:id="@+id/progress_constraint">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="93"
+                            android:textColor="@color/lightgrey_100"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            app:layout_constraintTop_toTopOf="@id/progress_constraint"
+                            app:layout_constraintBottom_toBottomOf="@id/progress_constraint"
+                            app:layout_constraintStart_toStartOf="@id/progress_constraint"
+                            app:layout_constraintEnd_toEndOf="@id/progress_constraint"
+                            />
+
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:layout_marginLeft="12dp"
+                            android:progress="93"
+                            app:indicatorColor="@color/red_200"
+                            app:indicatorSize="80dp"
+                            app:trackThickness="12dp"
+                            app:layout_constraintTop_toTopOf="@id/progress_constraint"
+                            app:layout_constraintBottom_toBottomOf="@id/progress_constraint"
+                            app:layout_constraintStart_toStartOf="@id/progress_constraint"
+                            app:layout_constraintEnd_toEndOf="@id/progress_constraint"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7.5"
+                android:orientation="vertical"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Popular Albums"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/lightgrey_100"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:paddingVertical="10dp"
+                    android:layout_weight="10"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        app:shapeAppearanceOverlay="@style/customRoundedImageView"
+                        tools:srcCompat="@tools:sample/avatars"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:layout_marginHorizontal="10dp"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        app:shapeAppearanceOverlay="@style/customRoundedImageView"
+                        tools:srcCompat="@tools:sample/avatars"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:layout_marginLeft="10dp"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        app:shapeAppearanceOverlay="@style/customRoundedImageView"
+                        tools:srcCompat="@tools:sample/avatars"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
