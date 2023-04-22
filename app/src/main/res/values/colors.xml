@@ -12,9 +12,18 @@
     <color name="green_100">#23B825</color>
     <color name="green_200">#18891f</color>
     <color name="orange_100">#d2672a</color>
+    <color name="red_200">#962b3b</color>
 
     <color name="darkgrey_100">#252425</color>
     <color name="darkgrey_200">#565656</color>
     <color name="lightgrey_100">#C1BABA</color>
     <color name="lightgrey_200">#8FE8E8E8</color>
+    
+    <color name="onsale">#1a6a1b</color>
+    <color name="offsale">#d62f20</color>
+    <color name="rescheduled">#dfa238</color>
+    <color name="postponed">#dfa238</color>
+    <color name="cancelled">#FF000000</color>
+
+
 </resources>
