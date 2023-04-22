@@ -1,6 +1,7 @@
 package com.example.eventfinder.Helpers;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -9,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.eventfinder.DataClasses.EventDetailsResponse;
 import com.example.eventfinder.DataClasses.Location;
 import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.DataClasses.SearchResponse;
@@ -21,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -191,5 +194,38 @@ public class ServerAccessHelper {
         requestQueue.add(jsonArrayRequest);
 
 
+    }
+
+    public void getEventsDetails(String id, VolleyCallBack volleyCallBack) {
+
+        String destUrl= "";
+        try {
+            destUrl = this.serverUrl + "eventSearch?id=" + URLEncoder.encode(id, java.nio.charset.StandardCharsets.UTF_8.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, destUrl, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    EventDetailsResponse eventDetailsResponse = new EventDetailsResponse(response);
+                    volleyCallBack.onSuccess(eventDetailsResponse);
+                    Log.d("REQUEST [EVENT DETAILS]", response.toString());
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        },
+        new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
     }
 }
