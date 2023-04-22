@@ -1,5 +1,6 @@
 package com.example.eventfinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,11 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eventfinder.Adapters.FavoritesAdapter;
-import com.example.eventfinder.Adapters.SearchEventListAdapter;
 import com.example.eventfinder.DataClasses.SearchResponse;
 import com.example.eventfinder.Helpers.SharedPreferencesAccessHelper;
+import com.example.eventfinder.Interfaces.NewActivityCallBack;
 import com.example.eventfinder.ViewModels.FavItemsViewModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -81,8 +83,19 @@ public class FavoritesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 //        Toast.makeText(getActivity(), "Favs", Toast.LENGTH_SHORT).show();
 
-        favoritesAdapter = new FavoritesAdapter(view.getContext(), favItemsViewModel);
+        favoritesAdapter = new FavoritesAdapter(view.getContext(), favItemsViewModel, new NewActivityCallBack<String>(){
+            @Override
+            public void onButtonClick(String data) {
+
+                Intent intent = new Intent(view.getContext(), EventDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("eventId", data);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         sharedPreferencesAccessHelper = new SharedPreferencesAccessHelper(view.getContext());
+
 
         recyclerView = view.findViewById(R.id.favRecyclerView);
         recyclerView.setAdapter(favoritesAdapter);
