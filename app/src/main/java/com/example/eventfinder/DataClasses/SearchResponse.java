@@ -1,8 +1,9 @@
 package com.example.eventfinder.DataClasses;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SearchResponse {
+public class SearchResponse implements Serializable {
 
     private String name;
     private String id;
