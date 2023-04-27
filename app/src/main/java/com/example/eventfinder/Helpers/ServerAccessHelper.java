@@ -1,7 +1,5 @@
 package com.example.eventfinder.Helpers;
 
-import android.app.Activity;
-import android.app.DownloadManager;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -14,16 +12,15 @@ import com.example.eventfinder.DataClasses.EventDetailsResponse;
 import com.example.eventfinder.DataClasses.Location;
 import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.DataClasses.SearchResponse;
+import com.example.eventfinder.DataClasses.ArtistResponse;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
 import com.example.eventfinder.Interfaces.VolleyCallBackArray;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -35,10 +32,12 @@ public class ServerAccessHelper {
     SearchResponse[] searchResponses;
 
     private RequestQueue requestQueue;
+    public int numOfRequestsMade;
     private Gson gson;
     public ServerAccessHelper(RequestQueue queue){
         this.requestQueue = queue;
         this.gson = new Gson();
+        this.numOfRequestsMade = 0;
     }
 
     public SearchResponse[] search(SearchObject searchObject, VolleyCallBackArray volleyCallBack){
@@ -226,6 +225,44 @@ public class ServerAccessHelper {
 
             }
         });
+        numOfRequestsMade++;
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getArtistDetails(String name, VolleyCallBack volleyCallBack){
+
+        String destUrl= "";
+        try {
+            destUrl = this.serverUrl + "spotify?artist=" + URLEncoder.encode(name, java.nio.charset.StandardCharsets.UTF_8.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String finalDestUrl = destUrl;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, destUrl, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    ArtistResponse artistResponse = gson.fromJson(response.toString(), ArtistResponse.class);
+                    volleyCallBack.onSuccess(artistResponse);
+                    Log.d("REQUEST [ARTIST DETAILS]", response.toString());
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                    Log.d("REQUEST FAIL [ARTIST DETAILS]", finalDestUrl);
+                }
+            }
+        },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+
+                }
+            });
+
+        numOfRequestsMade++;
         requestQueue.add(jsonObjectRequest);
     }
 }
