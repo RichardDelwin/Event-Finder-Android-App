@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 
 import com.example.eventfinder.Adapters.EventDetailsTabAdapter;
+import com.example.eventfinder.Fragments.ArtistTabFragment;
 import com.example.eventfinder.Fragments.EventTabFragment;
 import com.example.eventfinder.Fragments.SearchParentFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -26,7 +27,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         EventDetailsTabAdapter EventDetailsTabAdapter = new EventDetailsTabAdapter(getSupportFragmentManager(), getLifecycle());
         EventDetailsTabAdapter.addFragment(new EventTabFragment());
-        EventDetailsTabAdapter.addFragment(new FavoritesFragment());
+        EventDetailsTabAdapter.addFragment(new ArtistTabFragment());
         EventDetailsTabAdapter.addFragment(new FavoritesFragment());
         viewPager2.setAdapter(EventDetailsTabAdapter);
 
