@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="325dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
         app:cardBackgroundColor="@color/black"
@@ -22,53 +22,72 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="6"
+                android:paddingHorizontal="10dp"
                 android:layout_marginBottom="8dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:paddingVertical="15dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    app:shapeAppearanceOverlay="@style/customRoundedImageView"
-                    tools:srcCompat="@tools:sample/avatars"/>
+                    android:layout_weight="3.5"
+                    android:id="@+id/imageContainer1">
 
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/artistImage"
+                        android:layout_width="105dp"
+                        android:layout_height="105dp"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintBottom_toBottomOf="@id/imageContainer1"
+                        app:layout_constraintTop_toTopOf="@+id/imageContainer1"
+                        app:layout_constraintStart_toStartOf="@id/imageContainer1"
+                        app:layout_constraintEnd_toEndOf="@id/imageContainer1"
+                        app:shapeAppearanceOverlay="@style/customRoundedImageView"
+                        tools:srcCompat="@tools:sample/avatars"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4"
+                    android:layout_weight="5"
                     android:orientation="vertical"
-                    android:paddingVertical="10dp">
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="10dp">
 
                     <TextView
+                        android:id="@+id/artistName_TV"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Ed Sheeran"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:gravity="center|left"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
                         android:textColor="@color/lightgrey_100"
                         android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/artistFollowersCount"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="110M Followers"
                         android:singleLine="true"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:gravity="center|left"
                         android:textColor="@color/lightgrey_100"/>
+
                     <TextView
+                        android:id="@+id/spotifyLink"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Check out on Spotify"
+                        android:text="@string/checkOutonSpotify"
                         android:singleLine="true"
-                        android:textSize="16sp"
-                        android:gravity="center|left"/>
+                        android:textSize="14sp"
+                        android:gravity="center|left"
+                        />
 
                 </LinearLayout>
 
@@ -92,37 +111,43 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"
-                        android:id="@+id/progress_constraint">
+                        android:id="@+id/progressContainer">
+                    <TextView
+                        android:id="@+id/popularityScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="93"
+                        android:textColor="@color/lightgrey_100"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/progressContainer"
+                        app:layout_constraintEnd_toEndOf="@id/progressContainer"
+                        app:layout_constraintStart_toStartOf="@id/progressContainer"
+                        app:layout_constraintTop_toTopOf="@id/progressContainer" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="93"
-                            android:textColor="@color/lightgrey_100"
-                            android:textStyle="bold"
-                            android:textSize="16sp"
-                            app:layout_constraintTop_toTopOf="@id/progress_constraint"
-                            app:layout_constraintBottom_toBottomOf="@id/progress_constraint"
-                            app:layout_constraintStart_toStartOf="@id/progress_constraint"
-                            app:layout_constraintEnd_toEndOf="@id/progress_constraint"
-                            />
+                    <FrameLayout
+                        android:id="@+id/progress_constraint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="@id/progressContainer"
+                        app:layout_constraintStart_toStartOf="@id/progressContainer"
+                        app:layout_constraintTop_toTopOf="@id/progressContainer"
+                        app:layout_constraintBottom_toBottomOf="@id/progressContainer"
+                        >
 
                         <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progressBar_Popularity"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:indeterminate="false"
                             android:max="100"
-                            android:layout_marginLeft="12dp"
                             android:progress="93"
                             app:indicatorColor="@color/red_200"
                             app:indicatorSize="80dp"
-                            app:trackThickness="12dp"
-                            app:layout_constraintTop_toTopOf="@id/progress_constraint"
-                            app:layout_constraintBottom_toBottomOf="@id/progress_constraint"
-                            app:layout_constraintStart_toStartOf="@id/progress_constraint"
-                            app:layout_constraintEnd_toEndOf="@id/progress_constraint"
-                            />
+                            app:trackThickness="12dp" />
+
+                    </FrameLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
@@ -146,7 +171,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/lightgrey_100"/>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:paddingVertical="10dp"
@@ -154,36 +179,44 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="10"
-                        android:layout_marginRight="10dp"
-                        android:scaleType="centerCrop"
+                        android:id="@+id/albumImage1"
+                        android:layout_width="105dp"
+                        android:layout_height="105dp"
                         android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:shapeAppearanceOverlay="@style/customRoundedImageView"
-                        tools:srcCompat="@tools:sample/avatars"/>
+                        tools:srcCompat="@tools:sample/avatars" />
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="10"
+                        android:id="@+id/albumImage2"
+                        android:layout_width="105dp"
+                        android:layout_height="105dp"
                         android:layout_marginHorizontal="10dp"
-                        android:scaleType="centerCrop"
                         android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/customRoundedImageView"
-                        tools:srcCompat="@tools:sample/avatars"/>
+                        tools:srcCompat="@tools:sample/avatars" />
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="10"
-                        android:layout_marginLeft="10dp"
-                        android:scaleType="centerCrop"
+                        android:id="@+id/albumImage3"
+                        android:layout_width="105dp"
+                        android:layout_height="105dp"
                         android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/customRoundedImageView"
-                        tools:srcCompat="@tools:sample/avatars"/>
+                        tools:srcCompat="@tools:sample/avatars" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
         </LinearLayout>
