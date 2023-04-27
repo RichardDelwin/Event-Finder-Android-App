@@ -69,4 +69,25 @@ public class GeneralHelpers {
             return "";
         }
     }
+
+    public static String getFollowerInMorK(String followerCount) {
+
+        int followers = Integer.parseInt(followerCount.replaceAll(",", ""));
+
+        String res = "";
+        if (followers >= 1000000) {
+
+             res = String.valueOf(Math.round((followers / 1000000.0) * 10.0) / 10.0 ) + "M Followers";
+
+        } else if (followers >= 1000) {
+
+            res = String.valueOf(Math.round((followers / 1000.0) * 10.0) / 10.0) + "K Followers";
+
+        } else {
+
+            res = String.valueOf(followers) + "Followers";
+        }
+
+        return res;
+    }
 }
