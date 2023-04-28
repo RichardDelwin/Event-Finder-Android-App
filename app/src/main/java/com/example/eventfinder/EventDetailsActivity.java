@@ -25,6 +25,7 @@ import com.example.eventfinder.Fragments.SearchParentFragment;
 import com.example.eventfinder.Fragments.VenueTabFragment;
 import com.example.eventfinder.Helpers.SharedPreferencesAccessHelper;
 import com.example.eventfinder.ViewModels.EventDetailsDataViewModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -107,8 +108,10 @@ public class EventDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(sharedPreferencesAccessHelper.idExists(eventId)){
                     sharedPreferencesAccessHelper.unHeartThis(event);
+                    Snackbar.make(view, event.getName()+" removed from favorites", Snackbar.LENGTH_SHORT).show();
                 }else{
                     sharedPreferencesAccessHelper.heartThis(event);
+                    Snackbar.make(view, event.getName()+" added to favorites", Snackbar.LENGTH_SHORT).show();
                 }
                 resolveHeartStatus(eventId);
             }
