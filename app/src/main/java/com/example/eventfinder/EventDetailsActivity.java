@@ -119,6 +119,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabLayout_eventDetails);
         viewPager2 = findViewById(R.id.viewPager2_eventDetails);
+        viewPager2.setOffscreenPageLimit(2);
 
         eventName_Toolbar = findViewById(R.id.eventName_toolBar);
         eventName_Toolbar.setText(eventName);
