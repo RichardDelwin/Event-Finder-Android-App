@@ -22,7 +22,7 @@ public class GeneralHelpers {
 
     public static String formatDateWithMonthName(String localDate){
 
-        if(localDate==null)
+        if(localDate==null || localDate=="null")
             return "";
 
         Date date = null;
@@ -39,7 +39,7 @@ public class GeneralHelpers {
     }
 
     public static String getFormattedTime(String localTime) {
-        if(localTime==null)
+        if(localTime==null || localTime=="null")
             return "";
         LocalTime time = LocalTime.parse(localTime);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
