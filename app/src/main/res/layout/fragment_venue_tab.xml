@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.VenueTabFragment"
+    android:isScrollContainer="true">
+    <ScrollView
+        android:id="@+id/venueTab_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="20dp"
+            android:paddingBottom="60dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/venueDetailsCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/black"
+                android:layout_marginHorizontal="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/venueName_VenueTab"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Name"
+                            android:textColor="@color/lightgrey_100"
+                            android:textSize="20sp"
+                            android:gravity="center|left"
+                            android:layout_marginHorizontal="5dp"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/venueName_VenueTab_Res"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Levi's Stadium With Ed Sheeran"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/address_VenueTab"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Address"
+                            android:textColor="@color/lightgrey_100"
+                            android:textSize="20sp"
+                            android:gravity="center|left"
+                            android:layout_marginHorizontal="5dp"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/address_VenueTab_Res"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Levi's Stadium With Ed Sheeran"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/cityState_VenueTab"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="City/State"
+                            android:textColor="@color/lightgrey_100"
+                            android:textSize="20sp"
+                            android:gravity="center|left"
+                            android:layout_marginHorizontal="5dp"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/cityState_VenueTab_Res"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Levi's Stadium With Ed Sheeran"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/contact_venueTab"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Contact Info"
+                            android:textColor="@color/lightgrey_100"
+                            android:textSize="20sp"
+                            android:gravity="center|left"
+                            android:layout_marginHorizontal="5dp"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/contact_venueTab_Res"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Levi's Stadium With Ed Sheeran"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="225dp"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginBottom="20dp">
+
+
+                            <fragment
+                                android:id="@+id/map"
+                                android:name="com.google.android.gms.maps.SupportMapFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                tools:context=".Fragments.VenueTabMapsFragment"
+                                tools:layout="@layout/spinner_style" />
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/venueDetailsCard"
+                android:layout_marginHorizontal="20dp"
+                app:cardBackgroundColor="@color/postit"
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Open Hours"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:gravity="center|left"
+                        />
+
+                    <TextView
+                        android:id="@+id/openHoursTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="9AM to PM Monday through Friday"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="General Rules"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:gravity="center|left"
+                        />
+
+                    <TextView
+                        android:id="@+id/generalRulesTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="60dp"
+                        android:text="ALL INDIVIDUALS AND THEIR BELONGINGS ARE SUBJECT TO SEARCH. THE FOLLOWING INFORMATION IS SUBJECT TO CHANGE WITHOUT NOTICE. You and your belongings may be searched upon entry into the Stadium. The 49ers strongly encourage fans to not bring any type of bags. Fans will be able to carry the following style and size bag, package, or container at stadium plaza areas, stadium gates, or when approaching queue lines of fans awaiting entry into the stadium: Bags that are clear plastic, vinyl or PVC and do not exceed 12 x 6 x 12. (Official NFL team logo clear plastic tote bags are available through club merchandise outlets or at nflshop.com), or One-gallon clear plastic freezer bag (Ziploc bag or similar). Small clutch bags, approximately the size of a hand, with or without a handle or strap, may be carried into the stadium along with one of the clear bag options. An exception will be made for medically necessary items after proper inspection at a gate designated for this purpose. Prohibited items include, but are not limited to: purses larger than a clutch bag, coolers, briefcases, backpacks, fanny packs, cinch bags, luggage of any kind, seat cushions, computer bags and camera bags or any bag larger than the permissible size. By tendering the ticket and entering the Stadium, you consent to such searches and waive any related claims that you might have against the NFL, its member clubs, their affiliates and stadium landlord, or their agents. If you elect not to consent to the searches, you will be denied entry into the Stadium. PLEASE ARRIVE EARLY TO AVOID LAST MINUTE GATE PRESSURE"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:maxLines="3"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Child Rules"
+                        android:gravity="center|left"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/childRulesTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="60dp"
+                        android:text="CHILDREN UNDER THE AGE OF TWO (2) ARE ADMITTED FREE PROVIDED THEY SIT ON AN ADULT'S LAP. CHILDREN, AGED TWO (2) AND OVER MUST HAVE A VALID TICKET FOR ADMISSION. For additional Stadium information including permitted and prohibited items please visit http://www.levisstadium.com/stadium-info/about-levis-stadium/ Miscellaneous For additional Stadium information including permitted and prohibited items please call 415-656-4949 or visit www.49ers.com/stadium"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:maxLines="3"
+                        />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/venueTab_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    https://stackoverflow.com/questions/35865485/how-to-show-mapview-inside-of-cardview-->
