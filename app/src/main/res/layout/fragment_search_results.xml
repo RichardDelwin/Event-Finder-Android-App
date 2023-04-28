@@ -40,6 +40,7 @@ tools:context=".Fragments.SearchResultsFragment">
                 android:layout_marginLeft="2dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageView"
@@ -81,5 +82,28 @@ tools:context=".Fragments.SearchResultsFragment">
         app:layout_constraintVertical_bias="0.50"
         android:visibility="visible"/>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/NoEventsFoundCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No events found"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginVertical="10dp"
+            />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
