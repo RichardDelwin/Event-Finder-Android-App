@@ -19,6 +19,7 @@ import com.example.eventfinder.Helpers.SharedPreferencesAccessHelper;
 import com.example.eventfinder.Interfaces.NewActivityCallBack;
 import com.example.eventfinder.R;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,11 +31,13 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
     private List<SearchResponse> searchResponses;
     private SharedPreferencesAccessHelper sharedPreferencesAccessHelper;
 
+    private Context context;
     private NewActivityCallBack newActivityCallBack;
     public SearchEventListAdapter(Context context, NewActivityCallBack callBack){
         searchResponses = new ArrayList<SearchResponse>();
         sharedPreferencesAccessHelper = new SharedPreferencesAccessHelper(context);
         this.newActivityCallBack = callBack;
+        this.context = context;
     }
     @NonNull
     @Override
@@ -50,7 +53,6 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
         SearchResponse event = searchResponses.get(position);
 
         Picasso.get().load(event.getIcon()).into(holder.eventImage);
-//        Picasso.get().load(R.mipmap.heart_outline_hdpi).into(holder.eventFavButton);
 
         if(sharedPreferencesAccessHelper.idExists(event.getId())) {
             holder.eventFavButton.setImageResource(R.mipmap.heart_filled_hdpi);
@@ -67,10 +69,13 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
             @Override
             public void onClick(View view) {
                 if(sharedPreferencesAccessHelper.idExists(event.getId())){
+
                     holder.eventFavButton.setImageResource(R.mipmap.heart_outline_hdpi);
                     sharedPreferencesAccessHelper.unHeartThis(event);
+                    Snackbar.make(view, event.getName()+" removed from favorites", Snackbar.LENGTH_SHORT).show();
 
                 }else{
+                    Snackbar.make(view, event.getName()+" added to favorites", Snackbar.LENGTH_SHORT).show();
                     holder.eventFavButton.setImageResource(R.mipmap.heart_filled_hdpi);
                     sharedPreferencesAccessHelper.heartThis(event);
                 }
