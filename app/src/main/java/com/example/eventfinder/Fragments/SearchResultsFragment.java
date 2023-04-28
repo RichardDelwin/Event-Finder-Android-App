@@ -1,5 +1,6 @@
 package com.example.eventfinder.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,7 +26,9 @@ import com.example.eventfinder.DataClasses.FormData;
 import com.example.eventfinder.DataClasses.Location;
 import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.DataClasses.SearchResponse;
+import com.example.eventfinder.EventDetailsActivity;
 import com.example.eventfinder.Helpers.ServerAccessHelper;
+import com.example.eventfinder.Interfaces.NewActivityCallBack;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
 import com.example.eventfinder.Interfaces.VolleyCallBackArray;
 import com.example.eventfinder.R;
@@ -44,7 +47,7 @@ public class SearchResultsFragment extends Fragment {
     private CardView backCard;
     private SearchObject searchObject;
     private SearchEventListAdapter searchEventListAdapter;
-
+    private CardView NoEventsFound;
     private RecyclerView recyclerView;
 
     @Override
@@ -65,9 +68,21 @@ public class SearchResultsFragment extends Fragment {
         Bundle bundle = getArguments();
         formData = (FormData) bundle.getSerializable("formData");
 
-
+        NoEventsFound = view.findViewById(R.id.NoEventsFoundCard);
         recyclerView = view.findViewById(R.id.eventListRecycler);
-        searchEventListAdapter = new SearchEventListAdapter(view.getContext());
+        searchEventListAdapter = new SearchEventListAdapter(view.getContext(), new NewActivityCallBack<String>(){
+            @Override
+            public void onButtonClick(String data, String eventName, SearchResponse response) {
+
+                Intent intent = new Intent(view.getContext(), EventDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("eventId", data);
+                bundle.putString("eventName", eventName);
+                bundle.putSerializable("event", response);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(searchEventListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -115,14 +130,29 @@ public class SearchResultsFragment extends Fragment {
             @Override
             public void onSuccess(SearchResponse[] searchResponses) {
 
-                searchEventListAdapter.setData(searchResponses);
-                searchEventListAdapter.notifyDataSetChanged();
+                if(searchResponses.length == 0){
+                    NoEventsFound.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
+                    backCard.setVisibility(View.VISIBLE);
+                }else {
+                    searchEventListAdapter.setData(searchResponses);
+                    searchEventListAdapter.notifyDataSetChanged();
 
-                progressBar.setVisibility(View.GONE);
-                backCard.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    NoEventsFound.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
+                    backCard.setVisibility(View.VISIBLE);
+                }
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        searchEventListAdapter.notifyDataSetChanged();
     }
 
     private void resolveLocation_SearchApiCall() {
