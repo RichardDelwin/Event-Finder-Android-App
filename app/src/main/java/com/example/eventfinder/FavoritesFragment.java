@@ -85,11 +85,13 @@ public class FavoritesFragment extends Fragment {
 
         favoritesAdapter = new FavoritesAdapter(view.getContext(), favItemsViewModel, new NewActivityCallBack<String>(){
             @Override
-            public void onButtonClick(String data) {
+            public void onButtonClick(String data, String eventName, SearchResponse response) {
 
                 Intent intent = new Intent(view.getContext(), EventDetailsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("eventId", data);
+                bundle.putString("eventName", eventName);
+                bundle.putSerializable("event", response);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
