@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +39,9 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -51,8 +55,6 @@ import java.util.HashMap;
 public class EventTabFragment extends Fragment {
 
     private EventDetailsDataViewModel eventDetailsDataViewModel;
-
-//    private EventDetailSharedData eventDetailSharedData;
     private TextView artistRes;
     private TextView venueRes;
     private TextView dateRes;
@@ -82,12 +84,13 @@ public class EventTabFragment extends Fragment {
 
     private HashMap<String, Integer> map;
 
-    private ArrayList<ArtistResponse> artistsArrayList;
+//    private ArrayList<ArtistResponse> artistsArrayList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        eventDetailsDataViewModel = new ViewModelProvider(this).get(EventDetailsDataViewModel.class);
+        eventDetailsDataViewModel = new ViewModelProvider(getActivity()).get(EventDetailsDataViewModel.class);
+//                new ViewModelProvider(this).get(EventDetailsDataViewModel.class);
     }
 
     @Override
@@ -117,8 +120,6 @@ public class EventTabFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
         artistRes = view.findViewById(R.id.artistRes);
         venueRes = view.findViewById(R.id.venueRes_TV);
         dateRes = view.findViewById(R.id.dateRes_TV);
@@ -141,6 +142,7 @@ public class EventTabFragment extends Fragment {
         eventTabScroll = view.findViewById(R.id.eventTab_scrollView);
         eventTab_progressBar = view.findViewById(R.id.eventTab_progressBar);
 
+
         eventTabScroll.setVisibility(View.GONE);
         eventTab_progressBar.setVisibility(View.VISIBLE);
 
@@ -160,6 +162,7 @@ public class EventTabFragment extends Fragment {
             public void onSuccess(EventDetailsResponse eventDetailsResponse) {
 
                 serverAccessHelper.numOfRequestsMade--;
+
                 artistRes.setText(GeneralHelpers.formatArtists(eventDetailsResponse.getAttractions()));
                 venueRes.setText(eventDetailsResponse.getVenue());
 
@@ -183,46 +186,54 @@ public class EventTabFragment extends Fragment {
                         }
                     });
                 }
+
                 Picasso.get().load(eventDetailsResponse.getSeatMap()).into(seatMap_imageView);
 
-                getArtists(eventDetailsResponse.getAttractionsMusic());
+                eventDetailsDataViewModel.setVenueId(eventDetailsResponse.getVenueId());
+                eventDetailsDataViewModel.setTicketMaster(eventDetailsResponse.getBuyAt());
 
-//                eventTab_progressBar.setVisibility(View.GONE);
-//                eventTabScroll.setVisibility(View.VISIBLE);
+                eventTab_progressBar.setVisibility(View.GONE);
+                eventTabScroll.setVisibility(View.VISIBLE);
+
+                eventDetailsDataViewModel.setArtistsList(eventDetailsResponse.getAttractionsMusic());
+//                getArtists(eventDetailsResponse.getAttractionsMusic());
+
             }
 
         });
 
 
 //        https://stackoverflow.com/questions/25602298/how-to-check-volley-request-queue-is-emptyand-request-is-finished
-        requestQueue.addRequestEventListener(new RequestQueue.RequestEventListener() {
-            @Override
-            public void onRequestEvent(Request<?> request, int event) {
-                if(event == RequestQueue.RequestEvent.REQUEST_FINISHED && serverAccessHelper.numOfRequestsMade == 0){
-
-//                    eventDetailSharedData.setArtistsList(artistsArrayList);
-                    eventDetailsDataViewModel.setArtistsList(artistsArrayList);
-                    Log.d("[UPDATING VIEWMODEL]", artistsArrayList.get(0).getName());
-                    eventTab_progressBar.setVisibility(View.GONE);
-                    eventTabScroll.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+//        requestQueue.addRequestEventListener(new RequestQueue.RequestEventListener() {
+//            @Override
+//            public void onRequestEvent(Request<?> request, int event) {
+//                if(event == RequestQueue.RequestEvent.REQUEST_FINISHED && serverAccessHelper.numOfRequestsMade == 0){
+//
+////                    eventDetailSharedData.setArtistsList(artistsArrayList);
+////                    eventDetailsDataViewModel.setArtistsList(artistsArrayList);
+////                    Log.d("[UPDATING VIEWMODEL]", artistsArrayList.get(0).getName());
+////                    eventTab_progressBar.setVisibility(View.GONE);
+////                    eventTabScroll.setVisibility(View.VISIBLE);
+//
+//
+//                }
+//            }
+//        });
     }
 
-    private void getArtists(ArrayList<String> artists){
-
-        artistsArrayList = new ArrayList<>();
-        for(String artist : artists){
-            serverAccessHelper.getArtistDetails(artist, new VolleyCallBack<ArtistResponse>() {
-                @Override
-                public void onSuccess(ArtistResponse response) {
-                    serverAccessHelper.numOfRequestsMade--;
-                    artistsArrayList.add(response);
-                }
-            });
-        }
-    }
+//    private void getArtists(ArrayList<String> artists){
+//
+//        artistsArrayList = new ArrayList<>();
+//        for(String artist : artists){
+//            serverAccessHelper.getArtistDetails(artist, new VolleyCallBack<ArtistResponse>() {
+//                @Override
+//                public void onSuccess(ArtistResponse response) {
+//                    serverAccessHelper.numOfRequestsMade--;
+//                    artistsArrayList.add(response);
+//                }
+//            });
+//        }
+//    }
     private boolean resolveVisibilty(TextView nameView, TextView dataView, String data){
 
         if(data != null && data!=""){
