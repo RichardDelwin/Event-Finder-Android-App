@@ -13,6 +13,7 @@ import com.example.eventfinder.DataClasses.Location;
 import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.DataClasses.SearchResponse;
 import com.example.eventfinder.DataClasses.ArtistResponse;
+import com.example.eventfinder.DataClasses.VenueResponse;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
 import com.example.eventfinder.Interfaces.VolleyCallBackArray;
 import com.google.gson.Gson;
@@ -26,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class ServerAccessHelper {
-    final private String serverUrl = "https://myloth-hw8-backend-icno4892.wl.r.appspot.com/";//"http://localhost:3500/";//
+    final private String serverUrl = "https://myloth-hw8-backend-icno4892.wl.r.appspot.com/";
     final private String ipInfoUrl = "https://ipinfo.io/?token=7754ebeef5da73";
     final private String gMaps = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBMp7FiafypEXvkS4Hrhya4-hhDh3nnlr4&address=%s";
     SearchResponse[] searchResponses;
@@ -225,7 +226,7 @@ public class ServerAccessHelper {
 
             }
         });
-        numOfRequestsMade++;
+//        numOfRequestsMade++;
         requestQueue.add(jsonObjectRequest);
     }
 
@@ -263,6 +264,40 @@ public class ServerAccessHelper {
             });
 
         numOfRequestsMade++;
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getVenueDetails(String id, VolleyCallBack volleyCallBack) {
+
+        String destUrl= "";
+        try {
+            destUrl = this.serverUrl + "venueSearch?id=" + URLEncoder.encode(id, java.nio.charset.StandardCharsets.UTF_8.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, destUrl, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    VenueResponse venueResponse = gson.fromJson(response.toString(), VenueResponse.class);
+                    volleyCallBack.onSuccess(venueResponse);
+                    Log.d("REQUEST [VENUE]", response.toString());
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+
+                    }
+                });
+//        numOfRequestsMade++;
         requestQueue.add(jsonObjectRequest);
     }
 }
