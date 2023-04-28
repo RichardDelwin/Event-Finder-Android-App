@@ -18,6 +18,7 @@ import com.example.eventfinder.Interfaces.NewActivityCallBack;
 import com.example.eventfinder.R;
 import com.example.eventfinder.ViewModels.FavItemsViewModel;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                 holder.eventFavButton.setImageResource(R.mipmap.heart_outline_hdpi);
                 sharedPreferencesAccessHelper.unHeartThis(event);
                 favSearchResponses.remove(event);
+                Snackbar.make(view, event.getName()+" removed from favorites", Snackbar.LENGTH_SHORT).show();
                 if(favSearchResponses.size() == 0){
                     favItemsViewModel.getFavListEmptyStatus().setValue(Boolean.TRUE);
                 }
