@@ -1,4 +1,4 @@
-package com.example.eventfinder;
+package com.example.eventfinder.Fragments;
 
 import android.os.Bundle;
 
@@ -35,6 +35,7 @@ import com.example.eventfinder.DataClasses.Location;
 import com.example.eventfinder.DataClasses.SearchObject;
 import com.example.eventfinder.Helpers.ServerAccessHelper;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
+import com.example.eventfinder.R;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;

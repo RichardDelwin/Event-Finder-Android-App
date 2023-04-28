@@ -1,12 +1,12 @@
 package com.example.eventfinder;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 
+import com.example.eventfinder.Adapters.MainFragmentsAdapter;
+import com.example.eventfinder.Fragments.FavoritesFragment;
 import com.example.eventfinder.Fragments.SearchParentFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;

@@ -1,4 +1,4 @@
-package com.example.eventfinder;
+package com.example.eventfinder.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,11 +20,12 @@ import android.widget.Toast;
 
 import com.example.eventfinder.Adapters.FavoritesAdapter;
 import com.example.eventfinder.DataClasses.SearchResponse;
+import com.example.eventfinder.EventDetailsActivity;
 import com.example.eventfinder.Helpers.SharedPreferencesAccessHelper;
 import com.example.eventfinder.Interfaces.NewActivityCallBack;
+import com.example.eventfinder.R;
 import com.example.eventfinder.ViewModels.FavItemsViewModel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

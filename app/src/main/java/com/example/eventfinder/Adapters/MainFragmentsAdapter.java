@@ -1,4 +1,4 @@
-package com.example.eventfinder;
+package com.example.eventfinder.Adapters;
 
 import android.content.Context;
 
