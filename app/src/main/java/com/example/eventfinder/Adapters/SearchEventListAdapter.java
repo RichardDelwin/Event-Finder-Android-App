@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventfinder.DataClasses.SearchResponse;
 import com.example.eventfinder.Helpers.GeneralHelpers;
 import com.example.eventfinder.Helpers.SharedPreferencesAccessHelper;
+import com.example.eventfinder.Interfaces.NewActivityCallBack;
 import com.example.eventfinder.R;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
@@ -28,10 +29,12 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
 
     private List<SearchResponse> searchResponses;
     private SharedPreferencesAccessHelper sharedPreferencesAccessHelper;
-    boolean isFav = false;
-    public SearchEventListAdapter(Context context){
+
+    private NewActivityCallBack newActivityCallBack;
+    public SearchEventListAdapter(Context context, NewActivityCallBack callBack){
         searchResponses = new ArrayList<SearchResponse>();
         sharedPreferencesAccessHelper = new SharedPreferencesAccessHelper(context);
+        this.newActivityCallBack = callBack;
     }
     @NonNull
     @Override
@@ -63,16 +66,21 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
         holder.eventFavButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isFav){
-                    isFav = false;
+                if(sharedPreferencesAccessHelper.idExists(event.getId())){
                     holder.eventFavButton.setImageResource(R.mipmap.heart_outline_hdpi);
                     sharedPreferencesAccessHelper.unHeartThis(event);
 
                 }else{
-                    isFav = true;
                     holder.eventFavButton.setImageResource(R.mipmap.heart_filled_hdpi);
                     sharedPreferencesAccessHelper.heartThis(event);
                 }
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newActivityCallBack.onButtonClick(event.getId(), event.getName(), event);
             }
         });
     }
@@ -113,12 +121,12 @@ public class SearchEventListAdapter extends RecyclerView.Adapter<SearchEventList
             eventTime.setSelected(true);
             eventFavButton = itemView.findViewById(R.id.eventFavButton);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Clicked", Toast.LENGTH_LONG).show();
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Toast.makeText(view.getContext(), "Clicked", Toast.LENGTH_LONG).show();
+//                }
+//            });
         }
     }
 
