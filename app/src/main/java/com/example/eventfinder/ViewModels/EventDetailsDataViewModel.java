@@ -11,33 +11,45 @@ import java.util.ArrayList;
 
 public class EventDetailsDataViewModel extends ViewModel {
 
-    private MutableLiveData<ArrayList<ArtistResponse>> artists = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<String>> artists = new MutableLiveData<>();
+    private MutableLiveData<String> venueId = new MutableLiveData<>();
 
-    public ArrayList<ArtistResponse> getArtists() {
+    private MutableLiveData<String> ticketMasterLink = new MutableLiveData<>();
+
+    public void setTicketMaster(String data) {
+        this.ticketMasterLink.setValue(data);
+    }
+
+    public MutableLiveData<String> getTicketMasterLive(){
+        return this.ticketMasterLink;
+    }
+
+    public void setVenueId(String venueId) {
+        this.venueId.setValue(venueId);
+    }
+
+    public String getVenueId(){
+        return this.venueId.getValue();
+    }
+
+    public LiveData<String> getVenueIdLiveData(){
+        return this.venueId;
+    }
+
+    public ArrayList<String> getArtists() {
         return artists.getValue();
     }
 
 
-    public void addArtist(ArtistResponse object) {
-        ArrayList<ArtistResponse> temp = artists.getValue();
-
-        if (temp == null) {
-            temp = new ArrayList<>();
-        }
-        temp.add(object);
-
-        setArtistsList(temp);
-    }
-
-    public LiveData<ArrayList<ArtistResponse>> getArtistLiveData(){
+    public LiveData<ArrayList<String>> getArtistLiveData(){
         return artists;
     }
-    public void setArtistsList(ArrayList<ArtistResponse> artistsList) {
+    public void setArtistsList(ArrayList<String> artistsList) {
         artists.setValue(artistsList);
     }
 
     public int getArtistsCount() {
-        ArrayList<ArtistResponse> temp = artists.getValue();
+        ArrayList<String> temp = artists.getValue();
         if (temp == null) {
             return 0;
         }
