@@ -20,6 +20,7 @@ import com.example.eventfinder.DataClasses.ArtistResponse;
 import com.example.eventfinder.DataClasses.SearchResponse;
 import com.example.eventfinder.Fragments.ArtistTabFragment;
 import com.example.eventfinder.Fragments.EventTabFragment;
+import com.example.eventfinder.Fragments.FavoritesFragment;
 import com.example.eventfinder.Fragments.SearchParentFragment;
 import com.example.eventfinder.Fragments.VenueTabFragment;
 import com.example.eventfinder.Helpers.SharedPreferencesAccessHelper;
