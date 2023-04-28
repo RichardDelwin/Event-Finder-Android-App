@@ -76,7 +76,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         holder.eventCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newActivityCallBack.onButtonClick(event.getId());
+                newActivityCallBack.onButtonClick(event.getId(), event.getName(), event);
             }
         });
 
