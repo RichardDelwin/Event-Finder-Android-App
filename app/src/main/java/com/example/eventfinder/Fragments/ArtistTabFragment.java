@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -44,6 +45,8 @@ public class ArtistTabFragment extends Fragment {
     private ProgressBar artistProgressBar;
     private ArrayList<ArtistResponse> artistsArrayList;
 
+    private CardView artistMusicUnavailable;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,17 +65,25 @@ public class ArtistTabFragment extends Fragment {
 
         artistProgressBar = view.findViewById(R.id.progressBar_artistTab);
         recyclerView = view.findViewById(R.id.artistTab_recyclerView);
+        artistMusicUnavailable  = view.findViewById(R.id.artistMusicUnavailable);
 
+        artistMusicUnavailable.setVisibility(View.GONE);
         artistProgressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
 
+
         eventDetailsDataViewModel = new ViewModelProvider(getActivity()).get(EventDetailsDataViewModel.class);
 //                new ViewModelProvider(getParentFragmentManager().getFragments().get(0)).get(EventDetailsDataViewModel.class);
-        Log.d("ARTIST TAB VIEWMODEL" , String.valueOf(eventDetailsDataViewModel.getArtistsCount()));
+//        Log.d("ARTIST TAB VIEWMODEL" , String.valueOf(eventDetailsDataViewModel.getArtistsCount()));
         eventDetailsDataViewModel.getArtistLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
             @Override
             public void onChanged(ArrayList<String> musicians) {
                 Log.d("ARTIST TAB VIEWMODEL ONCHANGE" , String.valueOf(eventDetailsDataViewModel.getArtistsCount()));
+                if(musicians.size() == 0){
+                    artistProgressBar.setVisibility(View.GONE);
+                    artistMusicUnavailable.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                }
 //                artistsAdapter.setArtistsData(artistResponses, view.getContext());
 
                 getArtists(musicians);
@@ -85,14 +96,16 @@ public class ArtistTabFragment extends Fragment {
             public void onRequestEvent(Request<?> request, int event) {
                 if(event == RequestQueue.RequestEvent.REQUEST_FINISHED && serverAccessHelper.numOfRequestsMade == 0){
 
-                    artistsAdapter.setArtistsData(artistsArrayList, view.getContext());
+                    if(artistsArrayList.size()==0){
+                        artistMusicUnavailable.setVisibility(View.VISIBLE);
+                    }else {
+                        artistsAdapter.setArtistsData(artistsArrayList, view.getContext());
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
 //                    eventDetailSharedData.setArtistsList(artistsArrayList);
 //                    eventDetailsDataViewModel.setArtistsList(artistsArrayList);
 //                    Log.d("[UPDATING VIEWMODEL]", artistsArrayList.get(0).getName());
                     artistProgressBar.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-
-
                 }
             }
         });
