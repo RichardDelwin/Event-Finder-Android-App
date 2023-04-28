@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
@@ -139,7 +140,7 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        Button clearButton = view.findViewById(R.id.clear_button);
+        CardView clearButton = view.findViewById(R.id.clear_button);
         clearButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
