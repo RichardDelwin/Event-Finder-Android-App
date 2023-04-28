@@ -116,7 +116,6 @@ public class SearchResultsFragment extends Fragment {
     }
 
     private void makeSearchCall(Location location){
-        Toast.makeText(getActivity(), "Search called", Toast.LENGTH_SHORT).show();
 
         searchObject = new SearchObject(
                 formData.getKeyword(),
