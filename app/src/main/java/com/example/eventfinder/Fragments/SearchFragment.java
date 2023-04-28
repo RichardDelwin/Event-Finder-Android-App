@@ -22,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class SearchFragment extends Fragment {
     AutoCompleteAdapter autoCompleteAdapter;
     Map<String, String> category_dictionary;
 
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +84,7 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        progressBar = view.findViewById(R.id.search_progressBar);
         categorySpinner = view.findViewById(R.id.spinner_categories);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categories_list, R.layout.spinner_style);
         adapter.setDropDownViewResource(R.layout.spinner_style);
@@ -100,19 +103,21 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                progressBar.setVisibility(View.VISIBLE);
                 serverAccessHelper.getSuggestions(charSequence, new VolleyCallBack() {
                     @Override
                     public void onSuccess(Object o) {
                         ArrayList<String> suggestions = (ArrayList<String>) o;
                         autoCompleteAdapter.setArrayList(suggestions);
                         autoCompleteAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 });
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
 
