@@ -156,7 +156,7 @@ public class EventTabFragment extends Fragment {
         buyTicketsRes.setSelected(true);
 
 
-        Toast.makeText(getActivity(), "Making api call eventSearch", Toast.LENGTH_SHORT).show();
+//        .makeText(getActivity(), "Making api call eventSearch", .LENGTH_SHORT).show();
         serverAccessHelper.getEventsDetails(eventId, new VolleyCallBack<EventDetailsResponse>() {
             @Override
             public void onSuccess(EventDetailsResponse eventDetailsResponse) {

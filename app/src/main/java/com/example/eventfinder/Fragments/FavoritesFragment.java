@@ -53,7 +53,7 @@ public class FavoritesFragment extends Fragment {
 
         favItemsViewModel.isFavListEmpty.observe(getViewLifecycleOwner(), myArrayList -> {
             if (myArrayList) {
-                Toast.makeText(getActivity(), "VIew Model", Toast.LENGTH_SHORT).show();
+//                .makeText(getActivity(), "VIew Model", .LENGTH_SHORT).show();
                 recyclerView.setVisibility(View.GONE);
                 noFavsTV.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
