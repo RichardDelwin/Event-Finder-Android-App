@@ -6,12 +6,15 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
+    <color name="darkgrayPrimary">#101010</color>
+    <color name="artistCardGray">#141414</color>
+    <color name="toolbarGray">#1a1a1a</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
     <color name="green_100">#23B825</color>
-    <color name="green_200">#18891f</color>
-    <color name="orange_100">#d2672a</color>
+    <color name="green_200">#47ae14</color>
+    <color name="orange_100">#f87c29</color>
     <color name="red_200">#962b3b</color>
 
     <color name="darkgrey_100">#252425</color>
