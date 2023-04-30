@@ -64,7 +64,7 @@
                     android:layout_gravity="center"
                     android:src="@mipmap/facebook"
                     android:scaleType="fitCenter"
-                    android:background="@color/darkgrey_100"
+                    android:background="@color/toolbarGray"
                     />
                     <androidx.cardview.widget.CardView
 
@@ -79,7 +79,7 @@
                             android:layout_gravity="left"
                             android:src="@mipmap/twitter"
                             android:scaleType="fitCenter"
-                            android:background="@color/darkgrey_100"
+                            android:background="@color/toolbarGray"
                         />
                     </androidx.cardview.widget.CardView>
 
@@ -89,7 +89,7 @@
                     android:layout_height="35dp"
                     android:src="@mipmap/heart_outline_hdpi"
                     android:scaleType="fitCenter"
-                    android:background="@color/darkgrey_100"
+                    android:background="@color/toolbarGray"
                     android:layout_marginLeft="10dp"
                     />
 
