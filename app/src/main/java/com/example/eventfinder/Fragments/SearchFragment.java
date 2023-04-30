@@ -127,7 +127,7 @@ public class SearchFragment extends Fragment {
         locationET = view.findViewById(R.id.location_edittext);
 
 
-        Button searchButton = view.findViewById(R.id.search_button);
+        CardView searchButton = view.findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -137,19 +137,24 @@
                 android:layout_marginTop="30dp"
                 android:orientation="horizontal">
 
-
-                    <Button
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/search_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textAllCaps="false"
-                        android:text="@string/search_string"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
                         android:layout_marginRight="7dp"
-                        android:background="@drawable/rounded_corner_green_button"
-                    />
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/green_300"
+                        app:cardCornerRadius="10dp"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Search"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:textSize="18sp"/>
+                    </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/clear_button"
@@ -164,6 +169,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="Clear"
+                            android:textStyle="bold"
                             android:textColor="@color/white"
                             android:gravity="center"
                             android:textSize="18sp"/>
