@@ -71,6 +71,37 @@ public class VenueTabFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_venue_tab, container, false);
+        return view;
+    }
+
+
+
+    private void getVenueDetails(String id){
+        serverAccessHelper.getVenueDetails(id, new VolleyCallBack<VenueResponse>() {
+            @Override
+            public void onSuccess(VenueResponse response) {
+
+                venueNameTV.setText(response.getName());
+                addressTV.setText(response.getAddress());
+                cityStateTV.setText(response.getCity()+", "+response.getState());
+                contactTV.setText(response.getPhone());
+                latlng  = response.getVenueLocation();
+                openHoursTV.setText(response.getOpenHours());
+                generalRulesTV.setText(response.getGeneralRule());
+                childRulesTV.setText(response.getChildRule());
+
+                isApiResponseReady=true;
+                updateMap();
+
+                progressBar.setVisibility(View.GONE);
+                scrollView.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         requestQueue = Volley.newRequestQueue(getActivity());
         serverAccessHelper = new ServerAccessHelper(requestQueue);
@@ -103,35 +134,6 @@ public class VenueTabFragment extends Fragment implements OnMapReadyCallback {
             getVenueDetails(venueId);
         }
 
-        return view;
-    }
-
-    private void getVenueDetails(String id){
-        serverAccessHelper.getVenueDetails(id, new VolleyCallBack<VenueResponse>() {
-            @Override
-            public void onSuccess(VenueResponse response) {
-
-                venueNameTV.setText(response.getName());
-                addressTV.setText(response.getAddress());
-                cityStateTV.setText(response.getCity()+", "+response.getState());
-                contactTV.setText(response.getPhone());
-                latlng  = response.getVenueLocation();
-                openHoursTV.setText(response.getOpenHours());
-                generalRulesTV.setText(response.getGeneralRule());
-                childRulesTV.setText(response.getChildRule());
-
-                isApiResponseReady=true;
-                updateMap();
-
-                progressBar.setVisibility(View.GONE);
-                scrollView.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         scrollView = view.findViewById(R.id.venueTab_scrollView);
         scrollView.setVisibility(View.GONE);
 

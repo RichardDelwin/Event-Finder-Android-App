@@ -88,16 +88,18 @@ public class EventTabFragment extends Fragment {
 //    private ArrayList<ArtistResponse> artistsArrayList;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        eventDetailsDataViewModel = new ViewModelProvider(getActivity()).get(EventDetailsDataViewModel.class);
-//                new ViewModelProvider(this).get(EventDetailsDataViewModel.class);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_event_tab, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        eventDetailsDataViewModel = new ViewModelProvider(getActivity()).get(EventDetailsDataViewModel.class);
 
         Bundle bundle = getActivity().getIntent().getExtras();
         eventId = bundle.getString("eventId");
@@ -112,14 +114,6 @@ public class EventTabFragment extends Fragment {
         map.put("rescheduled", R.color.rescheduled);
         map.put("postponed", R.color.postponed);
         map.put("cancelled", R.color.cancelled);
-
-
-        return inflater.inflate(R.layout.fragment_event_tab, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         artistRes = view.findViewById(R.id.artistRes);
         venueRes = view.findViewById(R.id.venueRes_TV);

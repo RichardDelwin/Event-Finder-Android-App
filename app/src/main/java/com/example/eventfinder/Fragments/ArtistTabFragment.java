@@ -54,10 +54,6 @@ public class ArtistTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        requestQueue = Volley.newRequestQueue(getActivity());
-        serverAccessHelper = new ServerAccessHelper(requestQueue);
-
         return inflater.inflate(R.layout.fragment_artist_tab, container, false);
     }
 
@@ -65,7 +61,8 @@ public class ArtistTabFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        requestQueue = Volley.newRequestQueue(getActivity());
+        serverAccessHelper = new ServerAccessHelper(requestQueue);
         artistProgressBar = view.findViewById(R.id.progressBar_artistTab);
         recyclerView = view.findViewById(R.id.artistTab_recyclerView);
         artistMusicUnavailable  = view.findViewById(R.id.artistMusicUnavailable);

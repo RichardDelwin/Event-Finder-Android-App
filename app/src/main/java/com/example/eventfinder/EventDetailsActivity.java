@@ -53,8 +53,9 @@ public class EventDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         setContentView(R.layout.activity_event_details);
+
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         facebook = findViewById(R.id.facebook_button);
         twitter = findViewById(R.id.twitter_button);

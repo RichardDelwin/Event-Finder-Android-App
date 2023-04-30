@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        setContentView(R.layout.activity_main);
 
         tabLayout = findViewById(R.id.tabLayout_mainActivity);
         viewPager2 = findViewById(R.id.viewPager_mainActivity);
