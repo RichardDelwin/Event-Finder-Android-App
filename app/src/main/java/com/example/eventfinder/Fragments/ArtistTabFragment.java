@@ -24,10 +24,12 @@ import com.example.eventfinder.Adapters.ArtistsAdapter;
 import com.example.eventfinder.DataClasses.ArtistResponse;
 import com.example.eventfinder.Helpers.ServerAccessHelper;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
+import com.example.eventfinder.Interfaces.VolleyCallBackArtist;
 import com.example.eventfinder.R;
 import com.example.eventfinder.ViewModels.EventDetailsDataViewModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +46,7 @@ public class ArtistTabFragment extends Fragment {
     private RequestQueue requestQueue;
     private ProgressBar artistProgressBar;
     private ArrayList<ArtistResponse> artistsArrayList;
+    private ArtistResponse[] artistArrayListOrdered;
 
     private CardView artistMusicUnavailable;
 
@@ -85,7 +88,7 @@ public class ArtistTabFragment extends Fragment {
                     recyclerView.setVisibility(View.GONE);
                 }
 //                artistsAdapter.setArtistsData(artistResponses, view.getContext());
-
+                artistArrayListOrdered = new ArtistResponse[musicians.size()];
                 getArtists(musicians);
             }
         });
@@ -96,6 +99,7 @@ public class ArtistTabFragment extends Fragment {
             public void onRequestEvent(Request<?> request, int event) {
                 if(event == RequestQueue.RequestEvent.REQUEST_FINISHED && serverAccessHelper.numOfRequestsMade == 0){
 
+                    artistsArrayList = new ArrayList<>(Arrays.asList(artistArrayListOrdered));
                     if(artistsArrayList.size()==0){
                         artistMusicUnavailable.setVisibility(View.VISIBLE);
                     }else {
@@ -118,16 +122,18 @@ public class ArtistTabFragment extends Fragment {
 
     private void getArtists(ArrayList<String> artists) {
 
-        artistsArrayList = new ArrayList<>();
+        int index= 0;
         for (String artist : artists) {
-            serverAccessHelper.getArtistDetails(artist, new VolleyCallBack<ArtistResponse>() {
+            serverAccessHelper.getArtistDetails(artist, index, new VolleyCallBackArtist<ArtistResponse>() {
                 @Override
-                public void onSuccess(ArtistResponse response) {
+                public void onSuccess(ArtistResponse response, int index) {
 
                     serverAccessHelper.numOfRequestsMade--;
-                    artistsArrayList.add(response);
+//                    artistsArrayList.add(response);
+                    artistArrayListOrdered[index] = response;
                 }
             });
+            index++;
         }
     }
 }

@@ -4,8 +4,8 @@
 
     <style name="SCBSwitch" parent="Theme.EventFinderGreenLantern">
         <item name="colorControlActivated">@color/green_200</item>
-        <item name="colorSwitchThumbNormal">#f1f1f1</item>
-        <item name="android:colorForeground">@color/darkgrey_200</item>
+        <item name="colorSwitchThumbNormal">#b9b9b9</item>
+        <item name="android:colorForeground">#5a5a5a</item>
     </style>
 
     <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">

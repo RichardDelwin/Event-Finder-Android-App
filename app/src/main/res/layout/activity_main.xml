@@ -23,14 +23,14 @@
 <!--        >-->
 
 <!--    </com.google.android.material.appbar.AppBarLayout>-->
+<!--    android:elevation="4dp"-->
 <!--    <Toolbar></Toolbar>-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:backgroundTint="@color/darkgrey_100"
+        android:backgroundTint="@color/toolbarGray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

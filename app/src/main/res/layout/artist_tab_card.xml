@@ -10,7 +10,7 @@
         android:layout_height="325dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="@color/artistCardGray"
         app:cardCornerRadius="15dp">
 
         <LinearLayout
@@ -145,6 +145,7 @@
                             android:progress="93"
                             app:indicatorColor="@color/red_200"
                             app:indicatorSize="80dp"
+                            app:trackColor="@color/black"
                             app:trackThickness="12dp" />
 
                     </FrameLayout>

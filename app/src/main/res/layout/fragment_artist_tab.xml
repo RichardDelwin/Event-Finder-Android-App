@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="@color/darkgrayPrimary"
         app:cardCornerRadius="10dp"
         android:layout_marginHorizontal="20dp"
         android:visibility="visible">

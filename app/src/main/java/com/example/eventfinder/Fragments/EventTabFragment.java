@@ -3,6 +3,7 @@ package com.example.eventfinder.Fragments;
 import static android.content.Intent.getIntent;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -191,6 +192,7 @@ public class EventTabFragment extends Fragment {
 
                 eventDetailsDataViewModel.setVenueId(eventDetailsResponse.getVenueId());
                 eventDetailsDataViewModel.setTicketMaster(eventDetailsResponse.getBuyAt());
+                buyTicketsRes.setPaintFlags(buyTicketsRes.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
                 eventTab_progressBar.setVisibility(View.GONE);
                 eventTabScroll.setVisibility(View.VISIBLE);

@@ -16,7 +16,7 @@ public class GeneralHelpers {
         if(localDate==null)
             return "";
         LocalDate date = LocalDate.parse(localDate);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         return date.format(formatter);
     }
 
