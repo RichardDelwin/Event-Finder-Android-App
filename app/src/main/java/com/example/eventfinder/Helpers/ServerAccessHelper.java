@@ -16,6 +16,7 @@ import com.example.eventfinder.DataClasses.ArtistResponse;
 import com.example.eventfinder.DataClasses.VenueResponse;
 import com.example.eventfinder.Interfaces.VolleyCallBack;
 import com.example.eventfinder.Interfaces.VolleyCallBackArray;
+import com.example.eventfinder.Interfaces.VolleyCallBackArtist;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -230,7 +231,7 @@ public class ServerAccessHelper {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void getArtistDetails(String name, VolleyCallBack volleyCallBack){
+    public void getArtistDetails(String name, int index, VolleyCallBackArtist volleyCallBack){
 
         String destUrl= "";
         try {
@@ -246,7 +247,7 @@ public class ServerAccessHelper {
             public void onResponse(JSONObject response) {
                 try {
                     ArtistResponse artistResponse = gson.fromJson(response.toString(), ArtistResponse.class);
-                    volleyCallBack.onSuccess(artistResponse);
+                    volleyCallBack.onSuccess(artistResponse, index);
                     Log.d("REQUEST [ARTIST DETAILS]", response.toString());
                 }
                 catch (Exception e){
